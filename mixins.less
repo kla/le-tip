@@ -1,5 +1,7 @@
+@backgroundColor: rgba(0, 0, 0, 0.85);
+
 #popoverArrow {
-  .top(@arrowWidth: 5px, @color: black) {
+  .top(@arrowWidth: 5px, @color: @backgroundColor) {
     bottom: 0;
     left: 50%;
     margin-left: -@arrowWidth;
@@ -7,7 +9,7 @@
     border-right: @arrowWidth solid transparent;
     border-top: @arrowWidth solid @color;
   }
-  .left(@arrowWidth: 5px, @color: black) {
+  .left(@arrowWidth: 5px, @color: @backgroundColor) {
     top: 50%;
     right: 0;
     margin-top: -@arrowWidth;
@@ -15,7 +17,7 @@
     border-bottom: @arrowWidth solid transparent;
     border-left: @arrowWidth solid @color;
   }
-  .bottom(@arrowWidth: 5px, @color: black) {
+  .bottom(@arrowWidth: 5px, @color: @backgroundColor) {
     top: 0;
     left: 50%;
     margin-left: -@arrowWidth;
@@ -23,7 +25,7 @@
     border-right: @arrowWidth solid transparent;
     border-bottom: @arrowWidth solid @color;
   }
-  .right(@arrowWidth: 5px, @color: black) {
+  .right(@arrowWidth: 5px, @color: @backgroundColor) {
     top: 50%;
     left: 0;
     margin-top: -@arrowWidth;
@@ -39,7 +41,8 @@
           border-radius: @radius;
 }
 
-.opacity(@opacity) {
-  opacity: @opacity / 100;
-  filter: ~"alpha(opacity=@{opacity})";
+.box-shadow(@shadow) {
+  -webkit-box-shadow: @shadow;
+     -moz-box-shadow: @shadow;
+          box-shadow: @shadow;
 }
