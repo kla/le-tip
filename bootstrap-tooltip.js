@@ -94,12 +94,7 @@
     }
 
   , show: function () {
-      var $tip
-        , pos
-        , actualWidth
-        , actualHeight
-        , placement
-        , tp
+      var $tip, pos, placement, tp
 
       if (this.hasContent() && this.enabled) {
         $tip = this.tip()
@@ -109,37 +104,16 @@
           $tip.addClass('fade')
         }
 
-        placement = typeof this.options.placement == 'function' ?
-          this.options.placement.call(this, $tip[0], this.$element[0]) :
-          this.options.placement
-
         $tip
           .remove()
           .css({ top: 0, left: 0, display: 'block' })
           .appendTo(document.body)
 
-        pos = this.getPosition()
-
-        actualWidth = $tip[0].offsetWidth
-        actualHeight = $tip[0].offsetHeight
-
-        switch (placement) {
-          case 'bottom':
-            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
-            break
-          case 'top':
-            tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
-            break
-          case 'left':
-            tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}
-            break
-          case 'right':
-            tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}
-            break
-        }
+        placement = this.determineAutoPlacement()
+        tp = this.getPlacementPosition(placement)
 
         $tip
-          .css(tp)
+          .css({ left: tp.left, top: tp.top })
           .addClass(placement)
           .addClass('in')
       }
@@ -195,11 +169,67 @@
       return this.getTitle()
     }
 
+  , insideViewport: function(placement) {
+      var position = this.getPlacementPosition(placement)
+        , viewport = {
+            top: $(window).scrollTop(),
+            left: $(window).scrollLeft(),
+            bottom: $(window).outerHeight(),
+            right: $(window).outerWidth()
+          }
+        , inside =
+            position.left >= viewport.left && position.left <= viewport.right &&
+            position.right >= viewport.left && position.right <= viewport.right &&
+            position.top >= viewport.top && position.top <= viewport.bottom &&
+            position.bottom >= viewport.top && position.bottom <= viewport.bottom
+      return inside
+    }
+
+  , determineAutoPlacement: function() {
+      var placements = ['top', 'right', 'bottom', 'left']
+
+      if (typeof this.options.placement == 'function')
+        return this.options.placement.call(this, $tip[0], this.$element[0])
+
+      if (this.options.placement != 'auto')
+        return this.options.placement
+        
+      for (var i=0; i<placements.length; ++i) {
+        if (this.insideViewport(placements[i]))
+          return placements[i]
+      }
+      return 'bottom'
+    }
+
   , getPosition: function () {
       return $.extend({}, this.$element.offset(), {
         width: this.$element[0].offsetWidth
       , height: this.$element[0].offsetHeight
       })
+    }
+
+  , getPlacementPosition: function(placement) {
+      var pos = this.getPosition()
+        , $tip = this.tip()
+        , actualWidth = $tip[0].offsetWidth
+        , actualHeight = $tip[0].offsetHeight
+        , coords
+
+      switch (placement) {
+        case 'bottom':
+          coords = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
+          break
+        case 'top':
+          coords = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
+          break
+        case 'left':
+          coords = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}
+          break
+        case 'right':
+          coords = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}
+          break
+      }
+      return $.extend({}, coords, {right: coords.left + actualWidth, bottom: coords.top + actualHeight})
     }
 
   , getTitle: function () {
