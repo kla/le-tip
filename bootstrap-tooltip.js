@@ -132,7 +132,7 @@
       var $tip = this.tip()
         , title = this.getTitle()
 
-      $tip.find('.tooltip-inner')[this.isHTML(title) ? 'html' : 'text'](title)
+      $tip.find('.tooltip-content')[this.isHTML(title) ? 'html' : 'text'](title)
       $tip.removeClass('fade in top bottom left right')
     }
 
@@ -244,7 +244,9 @@
     }
 
   , tip: function () {
-      return this.$tip = this.$tip || $(this.options.template)
+      this.$tip = this.$tip || $(this.options.template)
+      this.$tip.data("tooltip", this)
+      return this.$tip
     }
 
   , validate: function () {
@@ -293,10 +295,24 @@
     animation: true
   , placement: 'auto'
   , selector: false
-  , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
+  , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"><div class="tooltip-content"></div></div></div>'
   , trigger: 'hover'
   , title: ''
   , delay: 0
   }
+
+  $(window)
+    .on("keyup", function(e) {
+      var tooltip
+      if (e.keyCode == 27 && (tooltip = $(".tooltip").data("tooltip")))
+        tooltip.hide()
+    })
+    .on("click", function(e) {
+      var tooltip = $(".tooltip")
+      if (tooltip && (tooltip = tooltip.data("tooltip")) && $(e.target).parents(".tooltip").length <= 0) {
+        if (tooltip.$element[0] != e.target)
+          tooltip.hide()
+      }
+    })
 
 }(window.jQuery);
