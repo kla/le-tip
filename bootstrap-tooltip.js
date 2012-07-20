@@ -187,18 +187,22 @@
 
   , determineAutoPlacement: function() {
       var placements = ['top', 'right', 'bottom', 'left']
+        , defaultPlacement = 'top'
 
       if (typeof this.options.placement == 'function')
         return this.options.placement.call(this, $tip[0], this.$element[0])
 
-      if (this.options.placement != 'auto')
+      if (!/auto/.test(this.options.placement))
         return this.options.placement
-        
+
+      if (/auto /.test(this.options.placement))
+        placements.splice(0, 0, defaultPlacement = this.options.placement.split(/ +/)[1])
+
       for (var i=0; i<placements.length; ++i) {
         if (this.insideViewport(placements[i]))
           return placements[i]
       }
-      return 'bottom'
+      return defaultPlacement
     }
 
   , getPosition: function () {
