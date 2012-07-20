@@ -9,22 +9,29 @@
         line-height: 18px;
         color: #404040;
       }
+      .blue .tooltip-inner { background-color: rgba(0, 0, 255, 0.85); }
+      .blue.top .tooltip-arrow { border-top-color: rgba(0, 0, 255, 0.85) !important; }
+      .blue.right .tooltip-arrow { border-right-color: rgba(0, 0, 255, 0.85) !important; }
+      .blue.bottom .tooltip-arrow { border-bottom-color: rgba(0, 0, 255, 0.85) !important; }
+      .blue.left .tooltip-arrow { border-left-color: rgba(0, 0, 255, 0.85) !important; }
+      }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="bootstrap-tooltip.js"></script>
     <script src="less-1.3.0.min.js"></script>
     <script>
       $(function() {
-        $("a.hover").tooltip();
+        $("a.hover").tooltip({placement: "auto bottom"});
         $("a.manual").tooltip({trigger: "manual"}).click(function() {
           $(this).tooltip("show");
           return false;
         });
+        $("a.blue").tooltip({cssClass: "blue"})
       });
     </script>
   </head>
   <body>
-    <p>Lorem <a href="#" class="hover" title="sapien commodo eu sagittis">ipsum</a> dolor sit amet, consectetur adipiscing elit. Fusce non ante a tellus facilisis vulputate at mattis turpis. Sed sit amet arcu et urna dapibus iaculis. Integer sodales est ut neque faucibus fringilla. Curabitur pulvinar, leo vel ornare rhoncus, dolor lacus tincidunt lacus, quis auctor sapien enim vel ipsum. Suspendisse ultrices lacinia condimentum. Morbi venenatis magna et leo vulputate sed dignissim massa congue. Vivamus convallis sagittis lacus in euismod.</p>
+    <p>Lorem <a href="#" class="hover" title="sapien commodo eu sagittis">ipsum</a> dolor sit amet, consectetur adipiscing elit. Fusce non ante a tellus facilisis vulputate at mattis turpis. Sed sit amet arcu et urna dapibus iaculis. Integer sodales est ut neque faucibus fringilla. Curabitur pulvinar, leo vel ornare rhoncus, dolor <a href="#" class="blue" title="lacus tincidunt lacus, quis auctor">sapien</a> enim vel ipsum. Suspendisse ultrices lacinia condimentum. Morbi venenatis magna et leo vulputate sed dignissim massa congue. Vivamus convallis sagittis lacus in euismod.</p>
     <p>Nullam eget magna magna. Aenean eu urna nunc. Vivamus ac augue ipsum, nec commodo augue. Phasellus quis purus sed arcu interdum dignissim. Donec ut turpis magna. Sed fringilla ipsum odio, eu lobortis felis. Aliquam erat volutpat. Vestibulum sem elit, convallis in interdum vitae, cursus at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu est in sem rhoncus lobortis a ut tortor. Pellentesque id risus est, sed aliquam tellus. Fusce aliquam odio nec sapien commodo eu sagittis eros vulputate. Sed ipsum sapien, sodales ut tristique sed, pharetra vitae dui. Aliquam molestie vestibulum erat, ut tincidunt sapien consequat sit amet. Praesent vel malesuada erat.</p>
     <p>In tempus aliquet nibh, ac placerat ligula interdum a. Nulla facilisi. Aliquam enim nibh, molestie quis dictum vel, viverra quis dui. Cum sociis natoque penatibus et <a href="#" class="manual" title="fringilla ultricies odio eu scelerisque. Integer leo nisi, sodales a dictum ut, hendrerit sit amet mi. Suspendisse vitae libero ut">magnis</a> dis parturient montes, nascetur ridiculus mus. Curabitur ut vehicula nunc. Praesent ut neque quis est tincidunt pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent non urna a tortor dictum mattis eu in libero. Cras non lorem quis ligula placerat dignissim nec at arcu. Morbi volutpat volutpat est in eleifend. Nullam ante turpis, commodo nec pretium quis, vehicula eget diam.</p>
     <p>Ut eu sapien odio. Quisque elit metus, ultrices nec scelerisque vel, tempor vitae urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse id velit nisl. Aliquam erat volutpat. Duis non libero dui, egestas dignissim est. Donec viverra ullamcorper ultrices. Duis in ultrices mauris. Integer interdum vulputate consectetur. Nunc fringilla ultricies odio eu scelerisque. Integer leo nisi, sodales a dictum ut, hendrerit sit amet mi. Suspendisse vitae libero ut turpis rutrum congue sit amet ac velit.</p>
