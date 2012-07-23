@@ -97,6 +97,7 @@
       var $tip, pos, placement, tp
 
       if (this.hasContent() && this.enabled) {
+        this.hideEverything()
         $tip = this.tip()
         this.setContent()
 
@@ -157,6 +158,10 @@
         removeWithAnimation() :
         $tip.remove()
     }
+
+  , hideEverything: function() {
+    $.each($(".tooltip"), function() { $(this).data("tooltip").hide() })
+  }
 
   , fixTitle: function () {
       var $e = this.$element
