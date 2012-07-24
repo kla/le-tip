@@ -179,8 +179,8 @@
         , viewport = {
             top: $(window).scrollTop(),
             left: $(window).scrollLeft(),
-            bottom: $(window).outerHeight(),
-            right: $(window).outerWidth()
+            bottom: $(window).scrollTop() + $(window).outerHeight(),
+            right: $(window).scrollLeft() + $(window).outerWidth()
           }
         , inside =
             position.left >= viewport.left && position.left <= viewport.right &&
