@@ -191,7 +191,7 @@
     }
 
   , determineAutoPlacement: function() {
-      var placements = ['top', 'right', 'bottom', 'left']
+      var placements = ['top', 'top-right', 'right', 'bottom-right', 'bottom', 'bottom-left', 'left', 'top-left']
         , defaultPlacement = 'top'
 
       if (typeof this.options.placement == 'function')
