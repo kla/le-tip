@@ -223,13 +223,26 @@
         , actualWidth = $tip[0].offsetWidth
         , actualHeight = $tip[0].offsetHeight
         , coords
+        , nudge = 20
 
       switch (placement) {
         case 'bottom':
           coords = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
           break
+        case 'bottom-left':
+          coords = {top: pos.top + pos.height, left: pos.left - actualWidth + nudge}
+          break
+        case 'bottom-right':
+          coords = {top: pos.top + pos.height, left: pos.left + pos.width - nudge}
+          break
         case 'top':
           coords = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
+          break
+        case 'top-left':
+          coords = {top: pos.top - actualHeight, left: pos.left - actualWidth + nudge}
+          break
+        case 'top-right':
+          coords = {top: pos.top - actualHeight, left: pos.left + pos.width - nudge}
           break
         case 'left':
           coords = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}

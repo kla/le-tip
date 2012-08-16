@@ -9,6 +9,22 @@
     border-right: @arrowWidth solid transparent;
     border-top: @arrowWidth solid @color;
   }
+  .top-left(@arrowWidth: 5px, @color: @backgroundColor) {
+    bottom: 0;
+    right: 12px;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-top: @arrowWidth solid @color;
+  }
+  .top-right(@arrowWidth: 5px, @color: @backgroundColor) {
+    bottom: 0;
+    left: 16px;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-top: @arrowWidth solid @color;
+  }
   .left(@arrowWidth: 5px, @color: @backgroundColor) {
     top: 50%;
     right: 0;
@@ -20,6 +36,22 @@
   .bottom(@arrowWidth: 5px, @color: @backgroundColor) {
     top: 0;
     left: 50%;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid @color;
+  }
+  .bottom-left(@arrowWidth: 5px, @color: @backgroundColor) {
+    top: 0;
+    right: 12px;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid @color;
+  }
+  .bottom-right(@arrowWidth: 5px, @color: @backgroundColor) {
+    top: 0;
+    left: 16px;
     margin-left: -@arrowWidth;
     border-left: @arrowWidth solid transparent;
     border-right: @arrowWidth solid transparent;
