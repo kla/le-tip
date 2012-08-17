@@ -1,0 +1,73 @@
+body {
+  margin: 2em auto 1em auto;
+  font: 13px arial;
+  line-height: 18px;
+  color: #404040;
+  background: url(noise.png);
+}
+h1 {
+  font-size: 2em;
+}
+h2 {
+  font-size: 1.2em;
+}
+h1, h2 {
+  text-shadow: 1px 1px 0px #ddd;
+}
+a {
+  color: #FF9047;
+}
+#content {
+  background: white;
+  padding: 1em 2em 3em 2em;
+  width: 600px;
+  position: relative;
+  margin: 0 auto;
+  -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+#content:before, #content:after {
+  position: absolute;
+  width: 40%;
+  height: 10px;
+  content: ' ';
+  left: 12px;
+  bottom: 12px;
+  background: transparent;
+  -webkit-transform: skew(-5deg) rotate(-5deg);
+  -moz-transform: skew(-5deg) rotate(-5deg);
+  -ms-transform: skew(-5deg) rotate(-5deg);
+  -o-transform: skew(-5deg) rotate(-5deg);
+  transform: skew(-5deg) rotate(-5deg);
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+#content:after {  
+  left: auto;
+  right: 12px;
+  -webkit-transform: skew(5deg) rotate(5deg);
+  -moz-transform: skew(5deg) rotate(5deg);
+  -ms-transform: skew(5deg) rotate(5deg);
+  -o-transform: skew(5deg) rotate(5deg);
+  transform: skew(5deg) rotate(5deg);
+}
+#monocole-guy {
+  float: right;
+  opacity: 0.6;
+  border: none;
+}
+.orange .tooltip-inner { background-color: rgba(255, 144, 71, 0.85); }
+.orange.top .tooltip-arrow { border-top-color: rgba(255, 144, 71, 0.85) !important; }
+.orange.right .tooltip-arrow { border-right-color: rgba(255, 144, 71, 0.85) !important; }
+.orange.bottom .tooltip-arrow { border-bottom-color: rgba(255, 144, 71, 0.85) !important; }
+.orange.left .tooltip-arrow { border-left-color: rgba(255, 144, 71, 0.85) !important; }
+.tip, .orange-tip {
+  cursor: hand;
+  border-bottom: 1px #ccc dotted;
+}
+code.tip, code.orange-tip {
+  border-bottom: none;
+}

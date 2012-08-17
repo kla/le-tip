@@ -1,40 +1,7 @@
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <link rel="stylesheet/less" type="text/css" href="jquery.le-tip.less"/>
-    <style type="text/css">
-      body {
-        width: 700px;
-        margin: 2em auto 1em auto;
-        font: 13px arial;
-        line-height: 18px;
-        color: #404040;
-        background-color: #f7f7f7;
-      }
-      h1 {
-        font-size: 2em;
-      }
-      h2 {
-        font-size: 1.2em;
-      }
-      h1, h2 {
-        text-shadow: 1px 1px 0px #ddd;
-      }
-      a {
-        color: #FF9047;
-      }
-      .orange .tooltip-inner { background-color: rgba(255, 144, 71, 0.85); }
-      .orange.top .tooltip-arrow { border-top-color: rgba(255, 144, 71, 0.85) !important; }
-      .orange.right .tooltip-arrow { border-right-color: rgba(255, 144, 71, 0.85) !important; }
-      .orange.bottom .tooltip-arrow { border-bottom-color: rgba(255, 144, 71, 0.85) !important; }
-      .orange.left .tooltip-arrow { border-left-color: rgba(255, 144, 71, 0.85) !important; }
-      .tip, .orange-tip {
-        cursor: hand;
-        border-bottom: 1px #ccc dotted;
-      }
-      code.tip, code.orange-tip {
-        border-bottom: none;
-      }
-    </style>
+    <link rel="stylesheet/less" type="text/css" href="index.less"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/less.js/1.3.0/less-1.3.0.min.js"></script>
     <script src="jquery.le-tip.js"></script>
@@ -46,49 +13,52 @@
     </script>
   </head>
   <body>
-    <h1>Le tip</h1>
-    <p>An extension of the <a href="http://twitter.github.com/bootstrap/javascript.html#tooltips">bootstrap-tooltip</a> plugin with the following new features added:</p>
-    <ul>
-      <li>auto placement of tooltip within viewport</li>
-      <li>
-        additional placement positions:
-        <span class="tip" title="top-left" data-placement="top-left">top-left</span>,
-        <span class="tip" title="top-right" data-placement="top-right">top-right</span>,
-        <span class="tip" title="bottom-right" data-placement="bottom-right">bottom-right</span>,
-        <span class="tip" title="bottom-left" data-placement="bottom-left">bottom-left</span>
-      </li>
-      <li>tooltips can be dismissed by pressing escape or clicking outside of the tooltip</li>
-      <li>can add a css class to the tooltip</li>
-    </ul>
+    <div id="content">
+      <img id="monocole-guy" class="tip" src="monocole-guy.jpg" title="Le tip"/>
+      <h1>Le tip</h1>
+      <p>An extension of the <a href="http://twitter.github.com/bootstrap/javascript.html#tooltips">bootstrap-tooltip</a> plugin with the following new features added:</p>
+      <ul>
+        <li>auto placement of tooltip within viewport</li>
+        <li>
+          additional placement positions:
+          <span class="tip" title="top-left" data-placement="top-left">top-left</span>,
+          <span class="tip" title="top-right" data-placement="top-right">top-right</span>,
+          <span class="tip" title="bottom-right" data-placement="bottom-right">bottom-right</span>,
+          <span class="tip" title="bottom-left" data-placement="bottom-left">bottom-left</span>
+        </li>
+        <li>tooltips can be dismissed by pressing escape or clicking outside of the tooltip</li>
+        <li>can add a css class to the tooltip</li>
+      </ul>
 
-    <h2>Basic Usage</h2>
-    <ul>
-      <li>
-        <code class="tip" title="initialize the tooltip(s)">$(".tip").tooltip();</code>
-      </li>
-      <li>
-        <code class="tip" title="basic tooltip with placement determined automatically">
-          &lt;span class="tip" title="basic tooltip with placement determined automatically"&gt;
-        </code>
-      </li>
-      <li>
-        <code class="tip" title="top-left placement" data-placement="top-left">
-          &lt;span class="tip" title="top-left placement" data-placement="top-left"&gt;
-        </code>
-      </li>
-    </ul>
+      <h2>Basic Usage</h2>
+      <ul>
+        <li>
+          <code class="tip" title="initialize the tooltip(s)">$(".tip").tooltip();</code>
+        </li>
+        <li>
+          <code class="tip" title="basic tooltip with automatic placement">
+            &lt;span class="tip" title="basic tooltip with automatic placement"&gt;
+          </code>
+        </li>
+        <li>
+          <code class="tip" title="top-left" data-placement="top-left">
+            &lt;span class="tip" title="top-left" data-placement="top-left"&gt;
+          </code>
+        </li>
+      </ul>
 
-    <h2>Adding a CSS class</h2>
-    <ul>
-      <li>
-        <code class="orange-tip" title="this is an orange tooltip">$(".tip").tooltip({cssClass: "orange"});</code>
-      </li>
-    </ul>
+      <h2>Adding a CSS class</h2>
+      <ul>
+        <li>
+          <code class="orange-tip" title="this is an orange tooltip">$(".tip").tooltip({cssClass: "orange"});</code>
+        </li>
+      </ul>
 
-    <h2>Download &amp; Source</h2>
-    <ul>
-      <li><a href="http://kla.github.com/le-tip/jquery.le-tip.js">http://kla.github.com/le-tip/jquery.le-tip.js</a></li>
-      <li><a href="http://github.com/kla/le-tip">http://github.com/kla/le-tip</a></li>
-    </ul>
+      <h2>Download &amp; Source</h2>
+      <ul>
+        <li><a href="http://kla.github.com/le-tip/jquery.le-tip.js">http://kla.github.com/le-tip/jquery.le-tip.js</a></li>
+        <li><a href="http://github.com/kla/le-tip">http://github.com/kla/le-tip</a></li>
+      </ul>
+    </div>
   </body>
 </html>
