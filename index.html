@@ -3,17 +3,36 @@
     <link rel="stylesheet/less" type="text/css" href="bootstrap-tooltip.less"/>
     <style type="text/css">
       body {
-        width: 500px;
-        margin: 1em auto;
+        width: 700px;
+        margin: 2em auto 1em auto;
         font: 13px arial;
         line-height: 18px;
         color: #404040;
+        background-color: #f7f7f7;
       }
-      .blue .tooltip-inner { background-color: rgba(0, 0, 255, 0.85); }
-      .blue.top .tooltip-arrow { border-top-color: rgba(0, 0, 255, 0.85) !important; }
-      .blue.right .tooltip-arrow { border-right-color: rgba(0, 0, 255, 0.85) !important; }
-      .blue.bottom .tooltip-arrow { border-bottom-color: rgba(0, 0, 255, 0.85) !important; }
-      .blue.left .tooltip-arrow { border-left-color: rgba(0, 0, 255, 0.85) !important; }
+      h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.2em;
+      }
+      h1, h2 {
+        text-shadow: 1px 1px 0px #ddd;
+      }
+      a {
+        color: #FF9047;
+      }
+      .orange .tooltip-inner { background-color: rgba(255, 144, 71, 0.85); }
+      .orange.top .tooltip-arrow { border-top-color: rgba(255, 144, 71, 0.85) !important; }
+      .orange.right .tooltip-arrow { border-right-color: rgba(255, 144, 71, 0.85) !important; }
+      .orange.bottom .tooltip-arrow { border-bottom-color: rgba(255, 144, 71, 0.85) !important; }
+      .orange.left .tooltip-arrow { border-left-color: rgba(255, 144, 71, 0.85) !important; }
+      .tip, .orange-tip {
+        cursor: hand;
+        border-bottom: 1px #ccc dotted;
+      }
+      code.tip, code.orange-tip {
+        border-bottom: none;
       }
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
@@ -21,22 +40,55 @@
     <script src="bootstrap-tooltip.js"></script>
     <script>
       $(function() {
-        $("a.hover").tooltip({placement: "auto bottom"});
-        $("a.manual").tooltip({trigger: "manual", placement: "bottom-left"}).click(function() {
-          $(this).tooltip("show");
-          return false;
-        });
-        $("a.blue").tooltip({cssClass: "blue"})
-        $(".tip").tooltip({placement: "bottom-left"});
+        $(".tip").tooltip();
+        $(".orange-tip").tooltip({cssClass: "orange"});
       });
     </script>
   </head>
   <body>
-    <p>Lorem <a href="#" class="hover" title="sapien commodo eu sagittis">ipsum</a> dolor sit amet, consectetur adipiscing elit. Fusce non ante a tellus facilisis vulputate at mattis turpis. Sed sit amet arcu et urna dapibus iaculis. Integer sodales est ut neque faucibus fringilla. Curabitur pulvinar, leo vel ornare rhoncus, dolor <a href="#" class="blue" title="lacus tincidunt lacus, quis auctor">sapien</a> enim vel ipsum. Suspendisse ultrices lacinia condimentum. Morbi venenatis magna et leo vulputate sed dignissim massa congue. Vivamus convallis sagittis lacus in euismod.</p>
-    <p>Nullam eget magna magna. Aenean eu urna nunc. Vivamus ac augue ipsum, nec commodo augue. Phasellus quis purus sed arcu interdum dignissim. Donec ut turpis magna. Sed fringilla ipsum odio, eu lobortis felis. Aliquam erat volutpat. Vestibulum sem elit, convallis in interdum vitae, cursus at lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu est in sem rhoncus lobortis a ut tortor. Pellentesque id risus est, sed aliquam tellus. Fusce aliquam odio nec sapien commodo eu sagittis eros vulputate. Sed ipsum sapien, sodales ut tristique sed, pharetra vitae dui. Aliquam molestie vestibulum erat, ut tincidunt sapien consequat sit amet. Praesent vel malesuada erat.</p>
-    <p>In tempus aliquet nibh, ac placerat ligula interdum a. Nulla facilisi. Aliquam enim nibh, molestie quis dictum vel, viverra quis dui. Cum sociis natoque penatibus et <a href="#" class="manual" title="fringilla ultricies odio eu scelerisque. Integer leo nisi, sodales a dictum ut, hendrerit sit amet mi. Suspendisse vitae libero ut">magnis</a> dis parturient montes, nascetur ridiculus mus. Curabitur ut vehicula nunc. Praesent ut neque quis est tincidunt pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Praesent non urna a tortor dictum mattis eu in libero. Cras non <a href="#" class="manual" title="blah">lorem</a> quis ligula placerat dignissim nec at arcu. Morbi volutpat volutpat est in eleifend. Nullam ante turpis, commodo nec pretium quis, vehicula eget diam.</p>
-    <p>Ut eu sapien odio. Quisque elit metus, ultrices nec scelerisque vel, tempor vitae urna. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse id velit nisl. Aliquam erat volutpat. Duis non libero dui, egestas dignissim est. Donec viverra ullamcorper ultrices. Duis in ultrices mauris. Integer interdum vulputate consectetur. Nunc fringilla ultricies odio eu scelerisque. Integer leo nisi, sodales a dictum ut, hendrerit sit amet mi. Suspendisse vitae libero ut turpis rutrum congue sit amet ac velit.</p>
-    <p>Nullam convallis dignissim ante, in convallis dolor aliquam ac. Pellentesque gravida placerat nisi at ullamcorper. Maecenas sed nisl justo, eget sollicitudin ipsum. Nulla ornare varius purus sit amet aliquam. Aliquam pulvinar lectus non lorem venenatis posuere quis a turpis. Donec in augue odio, sit amet vulputate turpis. Cras eleifend <a href="#" class="tip" title="vitae libero ut">dictum</a> placerat. Sed eu pretium lectus. Sed feugiat consectetur interdum. Maecenas mi nisi, faucibus eget dapibus in, vulputate at justo. Sed non enim justo, at <a href="#" class="hover" title="Donec viverra ullamcorper ultrices. Duis in ultrices mauris. Integer interdum vulputate consectetur. Nunc fringilla ultricies odio eu scelerisque. Integer leo nisi, sodales a dictum ut, hendrerit sit amet mi. Suspendisse vitae libero ut turpis rutrum congue sit amet ac velit.</p>
-    <p>Nullam convallis dignissim ante, in convallis dolor">venenatis</a> ipsum.</p>
+    <h1>Le tip</h1>
+    <p>An extension of the <a href="http://twitter.github.com/bootstrap/javascript.html#tooltips">bootstrap-tooltip</a> plugin with the following new features added:</p>
+    <ul>
+      <li>auto placement of tooltip within viewport</li>
+      <li>
+        additional placement positions:
+        <span class="tip" title="top-left" data-placement="top-left">top-left</span>,
+        <span class="tip" title="top-right" data-placement="top-right">top-right</span>,
+        <span class="tip" title="bottom-right" data-placement="bottom-right">bottom-right</span>,
+        <span class="tip" title="bottom-left" data-placement="bottom-left">bottom-left</span>
+      </li>
+      <li>tooltips can be dismissed by pressing escape or clicking outside of the tooltip</li>
+      <li>can add a css class to the tooltip</li>
+    </ul>
+
+    <h2>Basic Usage</h2>
+    <ul>
+      <li>
+        <code class="tip" title="initialize the tooltip(s)">$(".tip").tooltip();</code>
+      </li>
+      <li>
+        <code class="tip" title="basic tooltip with placement determined automatically">
+          &lt;span class="tip" title="basic tooltip with placement determined automatically"&gt;
+        </code>
+      </li>
+      <li>
+        <code class="tip" title="top-left placement" data-placement="top-left">
+          &lt;span class="tip" title="top-left placement" data-placement="top-left"&gt;
+        </code>
+      </li>
+    </ul>
+
+    <h2>Adding a CSS class</h2>
+    <ul>
+      <li>
+        <code class="orange-tip" title="this is an orange tooltip">$(".tip").tooltip({cssClass: "orange"});</code>
+      </li>
+    </ul>
+
+    <h2>Download &amp; Source</h2>
+    <ul>
+      <li><a href="http://kla.github.com/le-tip/jquery.le-tip.js">http://kla.github.com/le-tip/jquery.le-tip.js</a></li>
+      <li><a href="http://github.com/kla/le-tip">http://github.com/kla/le-tip</a></li>
+    </ul>
   </body>
 </html>
