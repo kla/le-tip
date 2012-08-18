@@ -320,18 +320,24 @@
   , delay: 0
   }
 
-  $(window)
-    .on("keyup", function(e) {
+  $(document)
+    .on('keyup', function(e) {
       var tooltip
-      if (e.keyCode == 27 && (tooltip = $(".tooltip").data("tooltip")))
+      if (e.keyCode == 27 && (tooltip = $('.tooltip').data('tooltip')))
         tooltip.hide()
     })
-    .on("click", function(e) {
-      var tooltip = $(".tooltip")
-      if (tooltip && (tooltip = tooltip.data("tooltip")) && $(e.target).parents(".tooltip").length <= 0) {
+    .on('click', function(e) {
+      var tooltip = $('.tooltip')
+      if (tooltip && (tooltip = tooltip.data('tooltip')) && $(e.target).parents('.tooltip').length <= 0) {
         if (tooltip.$element[0] != e.target)
           tooltip.hide()
       }
+    })
+    .on('mouseenter', '.tooltip', function(e) {
+      $(this).data('tooltip').enter(e)
+    })
+    .on('mouseleave', '.tooltip', function(e) {
+      $(this).data('tooltip').leave(e)
     })
 
 }(window.jQuery);
