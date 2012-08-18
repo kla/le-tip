@@ -155,7 +155,7 @@
     }
 
   , hideEverything: function() {
-    $.each($(".tooltip"), function() { $(this).data("tooltip").hide() })
+    $.each($('.tooltip'), function() { $(this).data('tooltip').hide() })
   }
 
   , fixTitle: function () {
@@ -261,9 +261,11 @@
     }
 
   , tip: function () {
-      this.$tip = this.$tip || $(this.options.template)
-      this.$tip.data("tooltip", this)
-      if (this.options.cssClass) this.$tip.addClass(this.options.cssClass)
+      if (!this.$tip) {
+        this.$tip = $(this.options.template)
+        if (this.options.cssClass) this.$tip.addClass(this.options.cssClass)
+      }
+      this.$tip.data('tooltip', this)
       return this.$tip
     }
 
