@@ -71,10 +71,8 @@
   , enter: function (e) {
       var self = $(e.currentTarget)[this.type](this._options).data(this.type)
 
-      if (!self.options.delay || !self.options.delay.show) return self.show()
-
-      clearTimeout(this.timeout)
       self.hoverState = 'in'
+      this.timeout = clearTimeout(this.timeout)
       this.timeout = setTimeout(function() {
         if (self.hoverState == 'in') self.show()
       }, self.options.delay.show)
@@ -83,10 +81,8 @@
   , leave: function (e) {
       var self = $(e.currentTarget)[this.type](this._options).data(this.type)
 
-      if (this.timeout) clearTimeout(this.timeout)
-      if (!self.options.delay || !self.options.delay.hide) return self.hide()
-
       self.hoverState = 'out'
+      this.timeout = clearTimeout(this.timeout)
       this.timeout = setTimeout(function() {
         if (self.hoverState == 'out') self.hide()
       }, self.options.delay.hide)
