@@ -46,6 +46,7 @@
       if (this.options.trigger != 'manual') {
         eventIn  = this.options.trigger == 'hover' ? 'mouseenter' : 'focus'
         eventOut = this.options.trigger == 'hover' ? 'mouseleave' : 'blur'
+
         this.$element.on(eventIn, this.options.selector, $.proxy(this.enter, this))
         this.$element.on(eventOut, this.options.selector, $.proxy(this.leave, this))
       }
@@ -69,29 +70,19 @@
     }
 
   , enter: function (e) {
-      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
-
-      self.hoverState = 'in'
-      this.timeout = clearTimeout(this.timeout)
-      this.timeout = setTimeout(function() {
-        if (self.hoverState == 'in') self.show()
-      }, self.options.delay.show)
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout($.proxy(this.show, this), Math.max(250, this.options.delay.show || 0))
     }
 
   , leave: function (e) {
-      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
-
-      self.hoverState = 'out'
-      this.timeout = clearTimeout(this.timeout)
-      this.timeout = setTimeout(function() {
-        if (self.hoverState == 'out') self.hide()
-      }, self.options.delay.hide)
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout($.proxy(this.hide, this), this.options.delay.hide || 0)
     }
 
   , show: function () {
       var $tip, pos, placement, tp
 
-      if (this.hasContent() && this.enabled) {
+      if (!this.$tip && this.hasContent() && this.enabled) {
         this.hideEverything()
         $tip = this.tip()
         this.setContent()
@@ -152,6 +143,7 @@
       $.support.transition && this.$tip.hasClass('fade') ?
         removeWithAnimation() :
         $tip.remove()
+      this.$tip = null
     }
 
   , hideEverything: function() {
