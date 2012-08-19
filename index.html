@@ -8,7 +8,6 @@
     <script>
       $(function() {
         $(".tip").tooltip();
-        $(".orange-tip").tooltip({cssClass: "orange"});
       });
     </script>
   </head>
@@ -46,12 +45,10 @@
             &lt;span class="tip" title="top-left" data-placement="top-left"&gt;
           </code>
         </li>
-      </ul>
-
-      <h2>Adding a CSS class</h2>
-      <ul>
         <li>
-          <code class="orange-tip" title="this is an orange tooltip">$(".tip").tooltip({cssClass: "orange"});</code>
+          <code class="tip" title="adding a css class" data-css="orange">
+            &lt;span class="tip" title="adding a css class" data-css="orange"&gt;
+          </code>
         </li>
       </ul>
 

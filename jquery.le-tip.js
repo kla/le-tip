@@ -255,7 +255,7 @@
   , tip: function () {
       if (!this.$tip) {
         this.$tip = $(this.options.template)
-        if (this.options.cssClass) this.$tip.addClass(this.options.cssClass)
+        if (this.options.css) this.$tip.addClass(this.options.css)
       }
       this.$tip.data('tooltip', this)
       return this.$tip
@@ -307,7 +307,7 @@
     animation: true
   , placement: 'auto'
   , selector: false
-  , cssClass: null
+  , css: null
   , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"><div class="tooltip-content"></div></div></div>'
   , trigger: 'hover'
   , title: ''
