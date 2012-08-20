@@ -70,13 +70,15 @@
     }
 
   , enter: function (e) {
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout($.proxy(this.show, this), Math.max(250, this.options.delay.show || 0))
+      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
+      clearTimeout(self.timeout)
+      self.timeout = setTimeout($.proxy(self.show, self), Math.max(250, self.options.delay.show || 0))
     }
 
   , leave: function (e) {
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout($.proxy(this.hide, this), this.options.delay.hide || 0)
+      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
+      clearTimeout(self.timeout)
+      self.timeout = setTimeout($.proxy(self.hide, self), self.options.delay.hide || 0)
     }
 
   , show: function () {
