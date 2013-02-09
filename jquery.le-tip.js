@@ -241,10 +241,24 @@
         , $e = this.$element
         , o = this.options
 
-      title = $e.attr('data-original-title')
-        || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
-
+      if ($e.attr('data-original-title')) {
+        title = $e.attr('data-original-title')
+      } else if (typeof o.title == 'function') {
+        title = o.title.call($e[0])
+      } else if (this.options.source && !$e.data("loading")) {
+        $e.data("loading", true)
+        $.get(this.options.source, $.proxy(this.getAjaxContent, this))
+        title = "..."
+      } else {
+        title = o.title
+      }
       return title
+    }
+
+  , getAjaxContent: function(response) {
+      this.$element.attr("data-original-title", response)
+      this.hide()
+      this.show()
     }
 
   , tip: function () {
@@ -314,6 +328,7 @@
   , title: ''
   , delay: 0
   , html: false
+  , source: null
   }
 
   /* TOOLTIP NO CONFLICT
