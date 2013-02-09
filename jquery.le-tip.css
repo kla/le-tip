@@ -1,0 +1,112 @@
+.le-tip {
+  position: absolute;
+  z-index: 1010;
+  display: block;
+  visibility: visible;
+  padding: 5px;
+  font: 12px arial;
+}
+.le-tip.top {
+  margin-top: -2px;
+}
+.le-tip.right {
+  margin-left: 2px;
+}
+.le-tip.bottom {
+  margin-top: 2px;
+}
+.le-tip.left {
+  margin-left: -2px;
+}
+.le-tip.top .le-tip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.left .le-tip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.bottom .le-tip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.right .le-tip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.top-left .le-tip-arrow {
+  bottom: 0;
+  right: 12px;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.top-right .le-tip-arrow {
+  bottom: 0;
+  left: 16px;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.bottom-left .le-tip-arrow {
+  top: 0;
+  right: 12px;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip.bottom-right .le-tip-arrow {
+  top: 0;
+  left: 16px;
+  margin-left: -5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.85);
+}
+.le-tip .le-tip-inner {
+  max-width: 200px;
+  padding: 8px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.85);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+.le-tip .le-tip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.le-tip.fade {
+  opacity: 0;
+  -webkit-transition: opacity 0.15s linear;
+  -moz-transition: opacity 0.15s linear;
+  -ms-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
+  transition: opacity 0.15s linear;
+}
+.le-tip.fade.in {
+  opacity: 1;
+}

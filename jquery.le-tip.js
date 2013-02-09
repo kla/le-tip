@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-tooltip.js v2.0.4
+ * bootstrap-tooltip.js v2.2.2
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ===========================================================
@@ -43,11 +43,14 @@
       this.options = this.getOptions(options)
       this.enabled = true
 
-      if (this.options.trigger != 'manual') {
-        eventIn  = this.options.trigger == 'hover' ? 'mouseenter' : 'focus'
+      if (this.options.trigger == 'click') {
+        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
+      } else if (this.options.trigger != 'manual') {
+        eventIn = this.options.trigger == 'hover' ? 'mouseenter' : 'focus'
         eventOut = this.options.trigger == 'hover' ? 'mouseleave' : 'blur'
-        this.$element.on(eventIn, this.options.selector, $.proxy(this.enter, this))
-        this.$element.on(eventOut, this.options.selector, $.proxy(this.leave, this))
+
+        this.$element.on(eventIn + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
       }
 
       this.options.selector ?
@@ -70,32 +73,20 @@
 
   , enter: function (e) {
       var self = $(e.currentTarget)[this.type](this._options).data(this.type)
-
-      if (!self.options.delay || !self.options.delay.show) return self.show()
-
-      clearTimeout(this.timeout)
-      self.hoverState = 'in'
-      this.timeout = setTimeout(function() {
-        if (self.hoverState == 'in') self.show()
-      }, self.options.delay.show)
+      clearTimeout(self.timeout)
+      self.timeout = setTimeout($.proxy(self.show, self), Math.max(250, self.options.delay.show || 0))
     }
 
   , leave: function (e) {
       var self = $(e.currentTarget)[this.type](this._options).data(this.type)
-
-      if (this.timeout) clearTimeout(this.timeout)
-      if (!self.options.delay || !self.options.delay.hide) return self.hide()
-
-      self.hoverState = 'out'
-      this.timeout = setTimeout(function() {
-        if (self.hoverState == 'out') self.hide()
-      }, self.options.delay.hide)
+      clearTimeout(self.timeout)
+      self.timeout = setTimeout($.proxy(self.hide, self), self.options.delay.hide || 0)
     }
 
   , show: function () {
       var $tip, pos, placement, tp
 
-      if (this.hasContent() && this.enabled) {
+      if (!this.$tip && this.hasContent() && this.enabled) {
         this.hideEverything()
         $tip = this.tip()
         this.setContent()
@@ -105,7 +96,7 @@
         }
 
         $tip
-          .remove()
+          .detach()
           .css({ top: 0, left: 0, display: 'block' })
           .appendTo(document.body)
 
@@ -119,20 +110,11 @@
       }
     }
 
-  , isHTML: function(text) {
-      // html string detection logic adapted from jQuery
-      return typeof text != 'string'
-        || ( text.charAt(0) === "<"
-          && text.charAt( text.length - 1 ) === ">"
-          && text.length >= 3
-        ) || /^(?:[^<]*<[\w\W]+>[^>]*$)/.exec(text)
-    }
-
   , setContent: function () {
       var $tip = this.tip()
         , title = this.getTitle()
 
-      $tip.find('.tooltip-content')[this.isHTML(title) ? 'html' : 'text'](title)
+      $tip.find('.le-tip-content')[this.options.html ? 'html' : 'text'](title)
       $tip.removeClass('fade in top bottom left right')
     }
 
@@ -144,28 +126,29 @@
 
       function removeWithAnimation() {
         var timeout = setTimeout(function () {
-          $tip.off($.support.transition.end).remove()
+          $tip.off($.support.transition.end).detach()
         }, 500)
 
         $tip.one($.support.transition.end, function () {
           clearTimeout(timeout)
-          $tip.remove()
+          $tip.detach()
         })
       }
 
       $.support.transition && this.$tip.hasClass('fade') ?
         removeWithAnimation() :
-        $tip.remove()
+        $tip.detach()
+      this.$tip = null
     }
 
   , hideEverything: function() {
-    $.each($(".tooltip"), function() { $(this).data("tooltip").hide() })
+    $.each($('.le-tip'), function() { $(this).data('tooltip').hide() })
   }
 
   , fixTitle: function () {
       var $e = this.$element
       if ($e.attr('title') || typeof($e.attr('data-original-title')) != 'string') {
-        $e.attr('data-original-title', $e.attr('title') || '').removeAttr('title')
+        $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
       }
     }
 
@@ -258,16 +241,32 @@
         , $e = this.$element
         , o = this.options
 
-      title = $e.attr('data-original-title')
-        || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
-
+      if ($e.attr('data-original-title')) {
+        title = $e.attr('data-original-title')
+      } else if (typeof o.title == 'function') {
+        title = o.title.call($e[0])
+      } else if (this.options.source && !$e.data("loading")) {
+        $e.data("loading", true)
+        $.get(this.options.source, $.proxy(this.getAjaxContent, this))
+        title = "..."
+      } else {
+        title = o.title
+      }
       return title
     }
 
+  , getAjaxContent: function(response) {
+      this.$element.attr("data-original-title", response)
+      this.hide()
+      this.show()
+    }
+
   , tip: function () {
-      this.$tip = this.$tip || $(this.options.template)
-      this.$tip.data("tooltip", this)
-      if (this.options.cssClass) this.$tip.addClass(this.options.cssClass)
+      if (!this.$tip) {
+        this.$tip = $(this.options.template)
+        if (this.options.css) this.$tip.addClass(this.options.css)
+      }
+      this.$tip.data('tooltip', this)
       return this.$tip
     }
 
@@ -291,15 +290,21 @@
       this.enabled = !this.enabled
     }
 
-  , toggle: function () {
-      this[this.tip().hasClass('in') ? 'hide' : 'show']()
+  , toggle: function (e) {
+      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
+      self[self.tip().hasClass('in') ? 'hide' : 'show']()
     }
 
+  , destroy: function () {
+      this.hide().$element.off('.' + this.type).removeData(this.type)
+    }
   }
 
 
  /* TOOLTIP PLUGIN DEFINITION
   * ========================= */
+
+  var old = $.fn.tooltip
 
   $.fn.tooltip = function ( option ) {
     return this.each(function () {
@@ -317,25 +322,41 @@
     animation: true
   , placement: 'auto'
   , selector: false
-  , cssClass: null
-  , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"><div class="tooltip-content"></div></div></div>'
+  , css: null
+  , template: '<div class="le-tip"><div class="le-tip-arrow"></div><div class="le-tip-inner"><div class="le-tip-content"></div></div></div>'
   , trigger: 'hover'
   , title: ''
   , delay: 0
+  , html: false
+  , source: null
   }
 
-  $(window)
-    .on("keyup", function(e) {
+  /* TOOLTIP NO CONFLICT
+   * =================== */
+
+  $.fn.tooltip.noConflict = function () {
+    $.fn.tooltip = old
+    return this
+  }
+
+  $(document)
+    .on('keyup', function(e) {
       var tooltip
-      if (e.keyCode == 27 && (tooltip = $(".tooltip").data("tooltip")))
+      if (e.keyCode == 27 && (tooltip = $('.le-tip').data('tooltip')))
         tooltip.hide()
     })
-    .on("click", function(e) {
-      var tooltip = $(".tooltip")
-      if (tooltip && (tooltip = tooltip.data("tooltip")) && $(e.target).parents(".tooltip").length <= 0) {
+    .on('click', function(e) {
+      var tooltip = $('.le-tip')
+      if (tooltip && (tooltip = tooltip.data('tooltip')) && $(e.target).parents('.le-tip').length <= 0) {
         if (tooltip.$element[0] != e.target)
           tooltip.hide()
       }
+    })
+    .on('mouseenter', '.le-tip', function(e) {
+      $(this).data('tooltip').enter(e)
+    })
+    .on('mouseleave', '.le-tip', function(e) {
+      $(this).data('tooltip').leave(e)
     })
 
 }(window.jQuery);
