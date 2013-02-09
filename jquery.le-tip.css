@@ -1,4 +1,4 @@
-.tooltip {
+.le-tip {
   position: absolute;
   z-index: 1010;
   display: block;
@@ -6,19 +6,19 @@
   padding: 5px;
   font: 12px arial;
 }
-.tooltip.top {
+.le-tip.top {
   margin-top: -2px;
 }
-.tooltip.right {
+.le-tip.right {
   margin-left: 2px;
 }
-.tooltip.bottom {
+.le-tip.bottom {
   margin-top: 2px;
 }
-.tooltip.left {
+.le-tip.left {
   margin-left: -2px;
 }
-.tooltip.top .tooltip-arrow {
+.le-tip.top .le-tip-arrow {
   bottom: 0;
   left: 50%;
   margin-left: -5px;
@@ -26,7 +26,7 @@
   border-right: 5px solid transparent;
   border-top: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.left .tooltip-arrow {
+.le-tip.left .le-tip-arrow {
   top: 50%;
   right: 0;
   margin-top: -5px;
@@ -34,7 +34,7 @@
   border-bottom: 5px solid transparent;
   border-left: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.bottom .tooltip-arrow {
+.le-tip.bottom .le-tip-arrow {
   top: 0;
   left: 50%;
   margin-left: -5px;
@@ -42,7 +42,7 @@
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.right .tooltip-arrow {
+.le-tip.right .le-tip-arrow {
   top: 50%;
   left: 0;
   margin-top: -5px;
@@ -50,7 +50,7 @@
   border-bottom: 5px solid transparent;
   border-right: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.top-left .tooltip-arrow {
+.le-tip.top-left .le-tip-arrow {
   bottom: 0;
   right: 12px;
   margin-left: -5px;
@@ -58,7 +58,7 @@
   border-right: 5px solid transparent;
   border-top: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.top-right .tooltip-arrow {
+.le-tip.top-right .le-tip-arrow {
   bottom: 0;
   left: 16px;
   margin-left: -5px;
@@ -66,7 +66,7 @@
   border-right: 5px solid transparent;
   border-top: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.bottom-left .tooltip-arrow {
+.le-tip.bottom-left .le-tip-arrow {
   top: 0;
   right: 12px;
   margin-left: -5px;
@@ -74,7 +74,7 @@
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip.bottom-right .tooltip-arrow {
+.le-tip.bottom-right .le-tip-arrow {
   top: 0;
   left: 16px;
   margin-left: -5px;
@@ -82,7 +82,7 @@
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(0, 0, 0, 0.85);
 }
-.tooltip-inner {
+.le-tip .le-tip-inner {
   max-width: 200px;
   padding: 8px;
   color: white;
@@ -94,12 +94,12 @@
   -moz-box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
-.tooltip-arrow {
+.le-tip .le-tip-arrow {
   position: absolute;
   width: 0;
   height: 0;
 }
-.fade {
+.le-tip.fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   -moz-transition: opacity 0.15s linear;
@@ -107,6 +107,6 @@
   -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
 }
-.fade.in {
+.le-tip.fade.in {
   opacity: 1;
 }

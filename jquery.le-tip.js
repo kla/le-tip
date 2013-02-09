@@ -114,7 +114,7 @@
       var $tip = this.tip()
         , title = this.getTitle()
 
-      $tip.find('.tooltip-content')[this.options.html ? 'html' : 'text'](title)
+      $tip.find('.le-tip-content')[this.options.html ? 'html' : 'text'](title)
       $tip.removeClass('fade in top bottom left right')
     }
 
@@ -142,7 +142,7 @@
     }
 
   , hideEverything: function() {
-    $.each($('.tooltip'), function() { $(this).data('tooltip').hide() })
+    $.each($('.le-tip'), function() { $(this).data('tooltip').hide() })
   }
 
   , fixTitle: function () {
@@ -323,7 +323,7 @@
   , placement: 'auto'
   , selector: false
   , css: null
-  , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"><div class="tooltip-content"></div></div></div>'
+  , template: '<div class="le-tip"><div class="le-tip-arrow"></div><div class="le-tip-inner"><div class="le-tip-content"></div></div></div>'
   , trigger: 'hover'
   , title: ''
   , delay: 0
@@ -342,20 +342,20 @@
   $(document)
     .on('keyup', function(e) {
       var tooltip
-      if (e.keyCode == 27 && (tooltip = $('.tooltip').data('tooltip')))
+      if (e.keyCode == 27 && (tooltip = $('.le-tip').data('tooltip')))
         tooltip.hide()
     })
     .on('click', function(e) {
-      var tooltip = $('.tooltip')
-      if (tooltip && (tooltip = tooltip.data('tooltip')) && $(e.target).parents('.tooltip').length <= 0) {
+      var tooltip = $('.le-tip')
+      if (tooltip && (tooltip = tooltip.data('tooltip')) && $(e.target).parents('.le-tip').length <= 0) {
         if (tooltip.$element[0] != e.target)
           tooltip.hide()
       }
     })
-    .on('mouseenter', '.tooltip', function(e) {
+    .on('mouseenter', '.le-tip', function(e) {
       $(this).data('tooltip').enter(e)
     })
-    .on('mouseleave', '.tooltip', function(e) {
+    .on('mouseleave', '.le-tip', function(e) {
       $(this).data('tooltip').leave(e)
     })
 
